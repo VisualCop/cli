@@ -4,6 +4,7 @@
     "module": "commonjs",
     "strict": true,
     "noImplicitThis": true,
+    "outDir": "./dist",
     "alwaysStrict": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

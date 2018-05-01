@@ -1,7 +1,7 @@
 {
   "name": "visualcop-cli",
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "dist/cli.js",
   "license": "MIT",
   "scripts": {
     "start": "ts-node ./src/cli.ts",
@@ -13,11 +13,18 @@
     "lint": "yarn format && yarn tslint && yarn tsc",
     "lint:fix": "yarn format:fix && yarn tslint:fix && yarn tsc",
     "test": "yarn lint",
-    "test:fix": "yarn lint:fix"
+    "test:fix": "yarn lint:fix",
+    "build": "rm -rf ./dist && tsc -p ./tsconfig.prod.json",
+    "prepublishOnly": "yarn test && yarn build",
+    "prepare": "patch-package"
   },
   "devDependencies": {
     "@types/glob": "^5.0.35",
+    "@types/lodash": "^4.14.108",
     "@types/node": "^9.6.5",
+    "@types/request": "^2.47.0",
+    "@types/request-promise": "^4.1.41",
+    "patch-package": "^5.1.1",
     "prettier": "^1.12.1",
     "ts-node": "^6.0.0",
     "tslint": "^5.9.1",
@@ -25,6 +32,11 @@
     "typestrict": "^0.0.8"
   },
   "dependencies": {
-    "glob": "^7.1.2"
+    "glob": "^7.1.2",
+    "graphql-request": "^1.5.2",
+    "lodash": "^4.17.10",
+    "promise-request": "^0.1.2",
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2"
   }
 }
