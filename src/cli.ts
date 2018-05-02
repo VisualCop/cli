@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import * as glob from "glob";
 
 import { getContainer } from "./container";
