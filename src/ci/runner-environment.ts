@@ -1,11 +1,6 @@
-import { getRequiredEnv } from "../configUtils";
+import { getRequiredEnv, getOptionalEnv } from "../configUtils";
 
-export interface IRunnerConfig {
-  commitSha: string;
-  baseBranchName: string;
-}
-
-export function getRunnerEnvironment(env: NodeJS.ProcessEnv): IRunnerConfig {
+export const getRunnerEnvironment = (env: NodeJS.ProcessEnv) => {
   if (!env.TRAVIS) {
     throw new Error("Only travis CI is supported");
   }
@@ -13,5 +8,9 @@ export function getRunnerEnvironment(env: NodeJS.ProcessEnv): IRunnerConfig {
   return {
     commitSha: getRequiredEnv(env, "TRAVIS_COMMIT"),
     baseBranchName: getRequiredEnv(env, "TRAVIS_PULL_REQUEST_BRANCH"),
+    eventType: getRequiredEnv(env, "TRAVIS_EVENT_TYPE"),
+    CI: getOptionalEnv(env, "CI"),
   };
-}
+};
+
+export type IRunnerConfig = ReturnType<typeof getRunnerEnvironment>;

@@ -7,6 +7,11 @@ import { getContainer } from "./container";
 async function start(): Promise<void> {
   const { api, getFileFullInfo, config, logger } = getContainer();
 
+  if (!config.runner.CI || config.runner.eventType !== "push") {
+    logger.info("Runner environment not correct. VisualCop will not run.");
+    process.exit(0);
+  }
+
   const files = glob.sync(config.fileGlob, {
     absolute: true,
   });
